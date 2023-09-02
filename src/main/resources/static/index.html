@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Data from API</title>
+</head>
+<body>
+    <h1>This is a simple WebPage made with Spring Boot:</h1>
+    <div id="api-response">
+        <!-- API responses will be displayed here -->
+    </div>
+
+    <script>
+        // Function to make a request to the API and update the HTML content
+        async function fetchDataFromAPI() {
+            try {
+                const response = await fetch('http://localhost:8080/api/hello');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data from the API');
+                }
+                const data = await response.text();
+                document.getElementById('api-response').textContent = data;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('api-response').textContent = 'Error fetching data from the API';
+            }
+        }
+
+        // Call the function when the page is fully loaded
+        window.addEventListener('load', fetchDataFromAPI);
+    </script>
+</body>
+</html>
